@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+    <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Conversor de monedas</label>
+          <div>
+            <label for="amount">Cantidad:</label>
+          </div>
+          <div>
+            <input type="number" id="amount" step="any" value="1">
+          </div>
+       
+          <div>
+            <label for="from">De:</label>
+            <select id="from">
+              <option value="USD">Dólar estadounidense (USD)</option>
+              <option value="EUR">Euro (EUR)</option>
+              <option value="GBP">Guarani Paraguayo (GP)</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="to">A:</label>
+            <select id="to">
+              <option value="USD">Dólar estadounidense (USD)</option>
+              <option value="EUR">Euro (EUR)</option>
+              <option value="GBP">Guarani Paraguayo (GP)</option>
+            </select>
+          </div>
+          
+          <div>
+            <button onclick="convert()">Convertir</button>
+          </div>
+          
+          <div id="result"></div>
+          
+          <script>
+          function convert() {
+            var amount = parseFloat(document.getElementById("amount").value);
+            var fromCurrency = document.getElementById("from").value;
+            var toCurrency = document.getElementById("to").value;
+            
+            // Aquí deberías tener un API para obtener las tasas de cambio, ya sea de un servicio en línea o una lista fija.
+            // Aquí se proporciona una lista de tasas de cambio fijas para fines de demostración.
+            var exchangeRates = {
+              "USD": { "USD": 1, "EUR": 0.92, "GP": 7.534,26 } ,
+              "EUR": { "USD": 1.09, "EUR": 1, "GP": 8.198,80 } ,
+              "GP": { "USD": 0.00013, "EUR":0.00012 , "GP": 1 }
+            };
+            
+            var conversionRate = exchangeRates[fromCurrency][toCurrency];
+            var result = amount * conversionRate;
+            
+            document.getElementById("result").innerHTML = amount + " " + fromCurrency + " = " + result.toFixed(2) + " " + toCurrency;
+          }
+          </script>
+    </form>
+</body>
+<script src="bootstrap.bundle.min.js"></script>
+</html>
